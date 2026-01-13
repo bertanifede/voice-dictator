@@ -18,6 +18,8 @@ from pynput.keyboard import Key, Controller
 MODEL_SIZE = "base"  # tiny, base, small, medium, large
 SAMPLE_RATE = 16000
 HOLD_KEY = Key.alt  # Option/Alt key (hold to record)
+MIN_AUDIO_DURATION = 0.5  # Minimum seconds of audio required
+MIN_AUDIO_ENERGY = 0.001  # Minimum RMS energy (filters silence)
 
 # State
 recording = False
@@ -72,6 +74,18 @@ def stop_recording():
 
     # Combine audio chunks
     audio = np.concatenate(audio_data, axis=0).flatten()
+
+    # Check minimum duration
+    duration = len(audio) / SAMPLE_RATE
+    if duration < MIN_AUDIO_DURATION:
+        print("❌ Recording too short")
+        return
+
+    # Check minimum energy (filter silence)
+    rms_energy = np.sqrt(np.mean(audio ** 2))
+    if rms_energy < MIN_AUDIO_ENERGY:
+        print("❌ No sound detected")
+        return
 
     # Transcribe
     result = model.transcribe(audio, fp16=False)

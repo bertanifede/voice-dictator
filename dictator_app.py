@@ -30,6 +30,8 @@ MODEL_SIZE = "medium"  # tiny, base, small, medium, large
 SAMPLE_RATE = 16000
 HOLD_KEY = Key.alt  # Option/Alt key (hold to record)
 MAX_HISTORY = 10
+MIN_AUDIO_DURATION = 0.5  # Minimum seconds of audio required
+MIN_AUDIO_ENERGY = 0.001  # Minimum RMS energy (filters silence)
 
 # Colors
 class C:
@@ -98,6 +100,18 @@ def stop_recording():
 
     # Combine audio chunks
     audio = np.concatenate(audio_data, axis=0).flatten()
+
+    # Check minimum duration
+    duration = len(audio) / SAMPLE_RATE
+    if duration < MIN_AUDIO_DURATION:
+        print(f" {C.GRAY}✗ (too short){C.RESET}")
+        return
+
+    # Check minimum energy (filter silence)
+    rms_energy = np.sqrt(np.mean(audio ** 2))
+    if rms_energy < MIN_AUDIO_ENERGY:
+        print(f" {C.GRAY}✗ (no sound){C.RESET}")
+        return
 
     # Transcribe
     result = model.transcribe(audio, fp16=False)
