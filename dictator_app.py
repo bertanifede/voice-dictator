@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Voice Dictator Menu Bar App
-- Hold Option key to record, release to transcribe and paste
-- Shift+Option to start continuous recording, Option to stop
+- Hold Control key to record, release to transcribe and paste
+- Shift+Control to start continuous recording, Control to stop
 - Menu bar shows last 10 transcriptions
 """
 
@@ -28,7 +28,7 @@ NSApplication.sharedApplication().setActivationPolicy_(NSApplicationActivationPo
 # Config
 MODEL_SIZE = "medium"  # tiny, base, small, medium, large
 SAMPLE_RATE = 16000
-HOLD_KEY = Key.alt  # Option/Alt key (hold to record)
+HOLD_KEY = Key.ctrl  # Control key (hold to record)
 MAX_HISTORY = 10
 MIN_AUDIO_DURATION = 0.5  # Minimum seconds of audio required
 MIN_AUDIO_ENERGY = 0.001  # Minimum RMS energy (filters silence)
@@ -218,15 +218,15 @@ def on_press(key):
 
     if key == HOLD_KEY:
         if toggle_mode:
-            # Option stops continuous recording
+            # Control stops continuous recording
             toggle_mode = False
             threading.Thread(target=stop_recording).start()
         elif shift_held:
-            # Shift+Option: start continuous recording
+            # Shift+Control: start continuous recording
             toggle_mode = True
             start_recording()
         else:
-            # Option only: hold to record
+            # Control only: hold to record
             start_recording()
 
 
@@ -258,8 +258,8 @@ def main():
     print(f"{C.GRAY}{'─' * 36}{C.RESET}")
     load_model()
     print()
-    print(f"  {C.BLUE}⌥{C.RESET}      Hold to record")
-    print(f"  {C.BLUE}⇧+⌥{C.RESET}    Continuous mode")
+    print(f"  {C.BLUE}^{C.RESET}       Hold to record")
+    print(f"  {C.BLUE}⇧+^{C.RESET}     Continuous mode")
     print()
     print(f"{C.GRAY}{'─' * 36}{C.RESET}")
 

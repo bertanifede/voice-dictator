@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Voice Dictator - Personal voice-to-text tool
-- Hold Option key to record, release to transcribe and paste
-- Shift+Option to start continuous recording, Option to stop
+- Hold Control key to record, release to transcribe and paste
+- Shift+Control to start continuous recording, Control to stop
 """
 
 import sys
@@ -17,7 +17,7 @@ from pynput.keyboard import Key, Controller
 # Config
 MODEL_SIZE = "base"  # tiny, base, small, medium, large
 SAMPLE_RATE = 16000
-HOLD_KEY = Key.alt  # Option/Alt key (hold to record)
+HOLD_KEY = Key.ctrl  # Control key (hold to record)
 MIN_AUDIO_DURATION = 0.5  # Minimum seconds of audio required
 MIN_AUDIO_ENERGY = 0.001  # Minimum RMS energy (filters silence)
 
@@ -113,16 +113,16 @@ def on_press(key):
 
     if key == HOLD_KEY:
         if toggle_mode:
-            # Option stops continuous recording
+            # Control stops continuous recording
             toggle_mode = False
             threading.Thread(target=stop_recording).start()
         elif shift_held:
-            # Shift+Option: start continuous recording
+            # Shift+Control: start continuous recording
             toggle_mode = True
             start_recording()
-            print("🔴 Continuous recording (Option to stop)")
+            print("🔴 Continuous recording (Control to stop)")
         else:
-            # Option only: hold to record
+            # Control only: hold to record
             start_recording()
 
 
@@ -148,8 +148,8 @@ def main():
     load_thread.join()
 
     print()
-    print("🎯 Hold OPTION (⌥) to record, release to transcribe")
-    print("🔴 SHIFT+OPTION to start continuous, OPTION to stop")
+    print("🎯 Hold CONTROL (^) to record, release to transcribe")
+    print("🔴 SHIFT+CONTROL to start continuous, CONTROL to stop")
     print("   Press Ctrl+C to quit")
     print()
 

@@ -6,8 +6,8 @@ A simple macOS menu bar app for voice-to-text using OpenAI Whisper. Hold a key t
 
 ## Features
 
-- **Hold Option (⌥)** to record, release to transcribe and auto-paste
-- **Shift+Option** for continuous recording mode
+- **Hold Control (^)** to record, release to transcribe and auto-paste
+- **Shift+Control** for continuous recording mode
 - Menu bar icon with last 10 transcriptions
 - Click any transcription to copy to clipboard
 - Open history in TextEdit
@@ -65,9 +65,9 @@ dictator
 
 | Shortcut | Action |
 |----------|--------|
-| Hold **⌥** (Option) | Record while held, transcribe on release |
-| **⇧+⌥** (Shift+Option) | Start continuous recording |
-| **⌥** (while recording) | Stop continuous recording |
+| Hold **^** (Control) | Record while held, transcribe on release |
+| **⇧+^** (Shift+Control) | Start continuous recording |
+| **^** (while recording) | Stop continuous recording |
 
 ## Configuration
 
