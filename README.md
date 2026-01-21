@@ -1,6 +1,7 @@
 # Voice Dictator
 
 A simple macOS menu bar app for voice-to-text using OpenAI Whisper. Hold a key to record, release to transcribe and paste.
+<img width="1109" height="318" alt="Screenshot 2026-01-21 at 8 56 34 AM" src="https://github.com/user-attachments/assets/c56147a0-7d9a-401f-acfc-cb8a18b27e04" />
 
 
 
