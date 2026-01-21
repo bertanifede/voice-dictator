@@ -2,7 +2,7 @@
 
 A simple macOS menu bar app for voice-to-text using OpenAI Whisper. Hold a key to record, release to transcribe and paste.
 
-<img width="1103" height="345" alt="Screenshot 2026-01-21 at 8 54 27 AM" src="https://github.com/user-attachments/assets/d74ff70b-73c1-4336-9424-b90678d3c70c" />
+
 
 
 ![Menu Bar](https://img.shields.io/badge/macOS-Menu%20Bar%20App-blue)
