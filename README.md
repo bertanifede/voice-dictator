@@ -24,7 +24,7 @@ A simple macOS menu bar app for voice-to-text using OpenAI Whisper. Hold a key t
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/YOUR_USERNAME/voice-dictator.git
+git clone https://github.com/bertanifede/voice-dictator.git
 cd voice-dictator
 ```
 
