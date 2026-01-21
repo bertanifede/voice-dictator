@@ -33,6 +33,20 @@ MAX_HISTORY = 10
 MIN_AUDIO_DURATION = 0.5  # Minimum seconds of audio required
 MIN_AUDIO_ENERGY = 0.001  # Minimum RMS energy (filters silence)
 
+# Common Whisper hallucinations on silence/noise
+HALLUCINATIONS = {
+    "thanks for watching",
+    "thank you for watching",
+    "subscribe",
+    "like and subscribe",
+    "see you in the next video",
+    "see you next time",
+    "bye",
+    "goodbye",
+    "you",
+    "the end",
+}
+
 # Colors
 class C:
     RED = "\033[91m"
@@ -116,6 +130,11 @@ def stop_recording():
     # Transcribe
     result = model.transcribe(audio, fp16=False)
     text = result["text"].strip()
+
+    # Filter hallucinations
+    if text.lower().strip("!?., ") in HALLUCINATIONS:
+        print(f" {C.GRAY}✗ (hallucination filtered){C.RESET}")
+        return
 
     if text:
         # Truncate display if too long
